@@ -1,0 +1,4 @@
+org.sklearn.sklearn_ext:
+  src: /path/to/sklearn_extension # Path to folder containing the extension files
+  conda_env_path: /path/to/conda/environment # Path to the Python environment to use
+  debug_mode: true # Optional line, if set to true, it will always use the latest changes of execute/configure, when that method is used within the KNIME Analytics Platform

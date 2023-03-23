@@ -1,0 +1,8 @@
+name: sklearn
+author: Seray Arslan, David Arnold, Carsten Haubold
+env_yml_path: org_knime_pythonscripting # we re-use the bundled Python environment
+extension_module: src/sklearn_ext
+description: KNIME nodes for Scikit learn algorithms
+group_id: org.knime.python
+version: 0.1.0
+vendor: KNIME AG, Zurich, Switzerland
