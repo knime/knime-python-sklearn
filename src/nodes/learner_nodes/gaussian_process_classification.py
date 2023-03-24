@@ -46,10 +46,9 @@ class GaussianProcessClassificationAlgorithmSettings:
         WhiteKernel = ("White Kernel", "sklearn's WhiteKernel")
 
     class MultiClassOptions(knext.EnumParameterOptions):
-        Default = ("None", "No method is selected. This is the default option.")
         OVR = (
             "One-vs-Rest",
-            "One binary Gaussian process classifier is fitted for each class.",
+            "One binary Gaussian process classifier is fitted for each class. This is the default.",
         )
         OVO = (
             "One-vs-One",
@@ -64,25 +63,12 @@ class GaussianProcessClassificationAlgorithmSettings:
         KernelOptions,
     )
 
-    multi_class = knext.BoolParameter(
-        "Multi-class",
-        "Whether or not to apply multi-class classification.",
-        False,
-    )
-
     multi_class_method = knext.EnumParameter(
         "Multi-class classification method",
         "Multi-class classification method selection.",
-        MultiClassOptions.Default.name,
+        MultiClassOptions.OVR.name,
         MultiClassOptions,
     )
-
-    def validate(self, values):
-        # Checks if any multi-class method is selected when the multi-class option is enabled
-        if values["multi_class"] == True and values["multi_class_method"] == "Default":
-            raise ValueError(
-                "Multi-class option is enabled but multi-class method is not selected."
-            )
 
 
 @knext.node(
@@ -247,13 +233,6 @@ class GaussianProcessClassificationLearner(knext.PythonNode):
             self.general_settings.target_column,
         )
 
-        if not self.algorithm_settings.multi_class:
-            if not utils.is_binary(dfy_encoded):
-                raise ValueError(
-                    """Invalid column values. Binary classification is selected but 
-                    the target column has more than 2 classes."""
-                )
-
         # Get the selected kernel object
         if self.algorithm_settings.kernel in utils.kernels:
             selected_kernel = utils.kernels[self.algorithm_settings.kernel]()
@@ -261,7 +240,13 @@ class GaussianProcessClassificationLearner(knext.PythonNode):
             selected_kernel = None
 
         # Get the selected multi classification method
-        selected_mc_method = utils.multi_class_methods[
+        MCO = GaussianProcessClassificationAlgorithmSettings.MultiClassOptions
+        multi_class_methods = {
+            MCO.OVR.name: "one_vs_rest",
+            MCO.OVO.name: "one_vs_one",
+        }
+
+        selected_mc_method = multi_class_methods[
             self.algorithm_settings.multi_class_method
         ]
 

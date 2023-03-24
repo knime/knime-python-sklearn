@@ -189,7 +189,7 @@ class ClassificationPredictor:
     It is only executable if the test data contains the columns that are used by the learner model.
     """
 
-    predictor_settings = utils.ClassificationPredictorGeneralSettings()
+    predictor_settings = ClassificationPredictorGeneralSettings()
 
     def configure(
         self,

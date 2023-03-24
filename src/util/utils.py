@@ -21,12 +21,6 @@ kernels = {
     "WhiteKernel": WhiteKernel,
 }
 
-multi_class_methods = {
-    "OVR": "one_vs_rest",
-    "OVO": "one_vs_one",
-    "Default": "one_vs_rest",
-}
-
 
 def is_numerical(column):
     # Filter numerical columns
@@ -424,38 +418,3 @@ class RegressionGeneralSettings:
         MissingValueHandling.SkipRow.name,
         MissingValueHandling,
     )
-
-
-# General settings for partial least squares nodes
-@knext.parameter_group(label="Input")
-class PLSGeneralSettings:
-
-    feature_columns = knext.MultiColumnParameter(
-        "Feature columns",
-        "Selection of columns used as features. Columns with nominal and numerical data are allowed.",
-        column_filter=is_nominal_numerical,
-    )
-
-    target_columns = knext.MultiColumnParameter(
-        "Target columns",
-        "Selection of column(s) used as target(s). Only columns with numerical data are allowed.",
-        column_filter=is_numerical,
-    )
-
-    missing_value_handling = knext.EnumParameter(
-        "If there are missing values in the features",
-        """Define whether missing values in the input data should be skipped or whether 
-        the node execution should fail on missing values.""",
-        MissingValueHandling.SkipRow.name,
-        MissingValueHandling,
-    )
-
-    def validate(self, values):
-        n_features = len(values["feature_columns"])
-        n_targets = len(values["target_columns"])
-
-        if n_targets > n_features:
-            raise knext.InvalidParametersError(
-                f"""The number of targets ({n_targets}) cannot be larger than the number
-                of features ({n_features})."""
-            )
