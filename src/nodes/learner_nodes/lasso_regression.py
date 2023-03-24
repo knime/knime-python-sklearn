@@ -9,7 +9,8 @@ class LassoAlgorithmSettings:
 
     alpha = knext.DoubleParameter(
         "Alpha",
-        "Constant that multiplies the L1 term, controlling regularization strength.",
+        """Constant that multiplies the L1 term, controlling regularization strength.
+        `alpha` must be a non-negative float i.e. in `[0, inf)`""",
         default_value=1.0,
         min_value=0,
     )
@@ -49,7 +50,7 @@ class LassoAlgorithmSettings:
 class LassoLearner(knext.PythonNode):
     """Lasso Learner
 
-    Learns Lasso Regression implemented by scikit-learn library.
+    Learns Lasso Regression implemented by [scikit-learn](https://scikit-learn.org/) library.
     It is a linear regression model trained with L1 prior as regularizer.
 
     The model is trained with the selected numerical target column, and feature columns

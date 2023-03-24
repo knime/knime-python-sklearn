@@ -43,7 +43,8 @@ class PartialLeastSquaresAlgorithmSettings:
     n_components = knext.IntParameter(
         "Number of components to keep",
         """The number of basic components to compute. 
-        Should be in [1, min(n_samples, n_features, n_targets)].""",
+        Should be in `[1, min(number_of_samples, number_of_features, number_of_targets)]`. 
+        Number of samples is the number of rows in the input table.""",
         default_value=1,
         min_value=1,
     )
@@ -63,13 +64,14 @@ class PartialLeastSquaresAlgorithmSettings:
 )
 @knext.output_port(
     "Trained model",
-    "Trained Partial least squares regression model.",
+    "Trained partial least squares regression model.",
     port_type=utils.regression_model_port_type,
 )
 class PartialLeastSquaresRegressionLearner(knext.PythonNode):
     """Partial least squares regression learner
 
-    Learns partial least squares regression implemented by scikit-learn library.
+    Learns partial least squares regression implemented by
+    [scikit-learn](https://scikit-learn.org/) library.
 
     The model is trained with the selected numerical target column(s), and feature columns
     (can be numerical or nominal) from the input table.

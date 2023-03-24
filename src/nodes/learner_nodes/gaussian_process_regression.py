@@ -25,15 +25,15 @@ class GaussianProcessRegressionAlgorithmSettings:
 
     kernel = knext.EnumParameter(
         "Kernel",
-        """The kernel specifying the covariance function of the GP. The default kernel is
-        ConstantKernel(1.0, constant_value_bounds="fixed") * RBF(1.0, length_scale_bounds="fixed").""",
+        """The kernel specifying the covariance function of the Gaussian Process. The default kernel is
+        `ConstantKernel(1.0, constant_value_bounds="fixed") * RBF(1.0, length_scale_bounds="fixed")`.""",
         KernelOptions.Default.name,
         KernelOptions,
     )
 
     normalize_y = knext.BoolParameter(
         "Normalize the target column values",
-        """Whether or not to normalize the target values y by removing the mean and scaling 
+        """Whether or not to normalize the target values `y` by removing the mean and scaling 
         to unit-variance. This is recommended for cases where zero-mean, unit-variance priors are used.""",
         False,
     )
@@ -58,9 +58,12 @@ class GaussianProcessRegressionAlgorithmSettings:
 class GaussianProcessRegressionLearner(knext.PythonNode):
     """Gaussian Process Regression Learner
 
-    Learns Gaussian Process Regression implemented by scikit-learn library.
-    The implementation follows the algorithm in section 2.1 of the paper "Gaussian Processes
-    for Machine Learning" by Carl E. Rasmussen and Christopher K.I. Williams (2006).
+    Learns Gaussian Process Regression implemented by [scikit-learn](https://scikit-learn.org/)
+    library.
+
+    The implementation follows the algorithm in section 2.1 of the paper [Gaussian Processes
+    for Machine Learning](https://gaussianprocess.org/gpml/chapters/RW.pdf) by Carl E. Rasmussen
+    and Christopher K.I. Williams (2006).
 
     The model is trained with the selected numerical target column, and feature columns
     (can be numerical or nominal) from the input table. By default, the rightmost numerical

@@ -58,7 +58,7 @@ class GaussianProcessClassificationAlgorithmSettings:
     kernel = knext.EnumParameter(
         "Kernel",
         """The kernel specifying the covariance function of the GP. The default kernel 
-        is '1.0 * RBF(1.0)' is used as default.""",
+        `1.0 * RBF(1.0)` is used as default.""",
         KernelOptions.Default.name,
         KernelOptions,
     )
@@ -91,9 +91,11 @@ class GaussianProcessClassificationLearner(knext.PythonNode):
     """Gaussian Process Classification Learner
 
     Learns Gaussian Process Classification based on Laplace approximation
-    implemented by scikit-learn library. The implementation follows the
-    algorithm in sections 3.1, 3.2 and 5.1 of the paper "Gaussian Processes
-    for Machine Learning" by Carl E. Rasmussen and Christopher K.I. Williams (2006).
+    implemented by [scikit-learn](https://scikit-learn.org/) library.
+
+    The implementation follows the algorithm in sections 3.1, 3.2 and 5.1 of the paper
+    [Gaussian Processes for Machine Learning](https://gaussianprocess.org/gpml/chapters/RW.pdf)
+    by Carl E. Rasmussen and Christopher K.I. Williams (2006).
 
     The model is trained with the selected nominal target column, and feature columns
     (can be nominal or numerical) from the input table. By default, the rightmost nominal

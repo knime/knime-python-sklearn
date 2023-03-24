@@ -11,7 +11,7 @@ LOGGER = logging.getLogger(__name__)
 class RegressionPredictorGeneralSettings:
     prediction_column = knext.StringParameter(
         "Custom prediction column name",
-        "If none is passed, the name of the prediction column name will be <target_column_name>_pred.",
+        "If no name is specified for the prediction column, it will default to `<target_column_name>_pred`.",
         default_value="",
     )
 
@@ -141,7 +141,7 @@ class ClassificationPredictorGeneralSettings:
 
     prediction_column = knext.StringParameter(
         "Custom prediction column name",
-        "If none is passed, the name of the prediction column name will be <target_column_name>_pred.",
+        "If no name is specified for the prediction column, it will default to `<target_column_name>_pred`.",
         default_value="",
     )
 
