@@ -74,7 +74,7 @@ class GaussianProcessClassificationAlgorithmSettings:
 @knext.node(
     name="Gaussian Process Classification Learner (sklearn)",
     node_type=knext.NodeType.LEARNER,
-    category=sklearn_ext.gpc_category,
+    category=sklearn_ext.classification_learners_category,
     icon_path="icons/sklearn-logo.png",
 )
 @knext.input_table(

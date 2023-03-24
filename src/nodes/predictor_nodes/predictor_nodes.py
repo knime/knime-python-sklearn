@@ -17,7 +17,7 @@ class RegressionPredictorGeneralSettings:
 
 
 @knext.node(
-    name="Sklearn Regression Predictor",
+    name="Regression Predictor (sklearn)",
     node_type=knext.NodeType.PREDICTOR,
     category=sklearn_ext.predictors_category,
     icon_path="icons/sklearn-logo.png",
@@ -159,7 +159,7 @@ class ClassificationPredictorGeneralSettings:
 
 
 @knext.node(
-    name="Sklearn Classification Predictor",
+    name="Classification Predictor (sklearn)",
     node_type=knext.NodeType.PREDICTOR,
     category=sklearn_ext.predictors_category,
     icon_path="icons/sklearn-logo.png",

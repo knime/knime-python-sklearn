@@ -33,7 +33,7 @@ class LassoAlgorithmSettings:
 @knext.node(
     name="Lasso Regression Learner (sklearn)",
     node_type=knext.NodeType.LEARNER,
-    category=sklearn_ext.linear_models_category,
+    category=sklearn_ext.regression_learners_category,
     icon_path="icons/sklearn-logo.png",
 )
 @knext.input_table(

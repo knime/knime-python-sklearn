@@ -10,57 +10,33 @@ main_category = knext.category(
 
 learners_category = knext.category(
     path=main_category,
-    level_id="sklearn_learners",
+    level_id="learners",
     name="Sklearn Learners",
-    description="Learner nodes for regression and classification",
+    description="Learner nodes",
     icon="icons/sklearn-logo.png",
 )
 
-partial_least_squares_category = knext.category(
+regression_learners_category = knext.category(
     path=learners_category,
-    level_id="pls",
-    name="Partial Least Squares",
-    description="Nodes for the Partial Least Squares family",
-    icon="icons/sklearn-logo.png",
-)
-
-linear_models_category = knext.category(
-    path=learners_category,
-    level_id="linear_models",
-    name="Linear Models",
-    description="Nodes for linear models",
-    icon="icons/sklearn-logo.png",
-)
-
-gaussian_processes_category = knext.category(
-    path=learners_category,
-    level_id="gaussian_processes",
-    name="Gaussian Processes",
-    description="Nodes for gaussian processes",
-    icon="icons/sklearn-logo.png",
-)
-
-gpr_category = knext.category(
-    path=gaussian_processes_category,
-    level_id="gaussian_process_regression",
+    level_id="regression",
     name="Regression",
-    description="Nodes for gaussian process regression",
+    description="Nodes for sklearn regression algorithms",
     icon="icons/sklearn-logo.png",
 )
 
-gpc_category = knext.category(
-    path=gaussian_processes_category,
-    level_id="gaussian_process_classification",
+classification_learners_category = knext.category(
+    path=learners_category,
+    level_id="classification",
     name="Classification",
-    description="Nodes for gaussian process classification",
+    description="Nodes for sklearn classification algorithms",
     icon="icons/sklearn-logo.png",
 )
 
 predictors_category = knext.category(
     path=main_category,
-    level_id="sklearn_predictors",
+    level_id="predictors",
     name="Sklearn Predictors",
-    description="Predictor nodes for regression and classification",
+    description="Predictor nodes for sklearn algorithms",
     icon="icons/sklearn-logo.png",
 )
 
