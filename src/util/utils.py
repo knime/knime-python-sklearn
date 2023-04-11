@@ -103,6 +103,11 @@ def encode_train_feature_columns(dfx):
     dfx_numerical.index = dfx_nominal_encoded.index
     dfx_encoded = pd.concat((dfx_numerical, dfx_nominal_encoded), 1)
 
+    # Convert feature column names to string
+    # (due to: feature names are only supported if all input features
+    # have string names in scikit-learn 1.2)
+    dfx_encoded.columns = dfx_encoded.columns.astype(str)
+
     return dfx_encoded, one_hot_encoder
 
 
@@ -126,6 +131,11 @@ def encode_test_feature_columns(dfx, encoder):
     # Concatenate nominal and numerical dataframes back
     dfx_numerical.index = dfx_nominal_encoded.index
     dfx_encoded = pd.concat((dfx_numerical, dfx_nominal_encoded), 1)
+
+    # Convert feature column names to string
+    # (due to: feature names are only supported if all input features
+    # have string names in scikit-learn 1.2)
+    dfx_encoded.columns = dfx_encoded.columns.astype(str)
 
     return dfx_encoded
 
