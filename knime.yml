@@ -8,3 +8,4 @@ version: 0.1.0
 vendor: KNIME AG, Zurich, Switzerland
 feature_dependencies:
   - org.knime.features.python3.scripting 4.7.0
+license_file: LICENSE.TXT
