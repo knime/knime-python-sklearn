@@ -225,13 +225,12 @@ class PartialLeastSquaresRegressionLearner(knext.PythonNode):
                 )
 
         n_features = len(self.general_settings.feature_columns)
-        n_targets = len(self.general_settings.target_columns)
         n_components = self.algorithm_settings.n_components
 
-        if n_components > min([n_features, n_targets]):
+        if n_components > n_features:
             raise knext.InvalidParametersError(
                 f"""The number of components ({n_components}) cannot be larger than the number
-                of features ({n_features}) or the number of targets ({n_targets})."""
+                of features ({n_features})."""
             )
         return utils.RegressionModelObjectSpec(feature_schema, target_schema)
 
