@@ -43,7 +43,7 @@
 # ------------------------------------------------------------------------
 
 
-import knime_extension as knext
+import knime.extension as knext
 import sklearn_ext
 from util import utils
 import logging
@@ -145,19 +145,26 @@ class RegressionPredictor:
 
         df = table.to_pandas()
 
-        # Skip rows with missing values if "SkipRow" option of the learner node is selected
-        # or fail execution if "Fail" is selected and there are missing values
-        df = utils.handle_missing_values(df, port_object.handle_missing_values)
-
         # Get feature columns
         x_value_columns = port_object.spec.feature_schema.column_names
+
+        # Get target columns
+        y_value_columns = port_object.spec.target_schema.column_names
 
         # Get target column for the prediction column
         y_pred = utils.get_prediction_column_name(
             self.predictor_settings.prediction_column, port_object.spec.target_schema
         )
 
-        # Choose selected columns
+        # Skip rows with missing values if "SkipRow" option of the learner node is selected
+        # or fail execution if "Fail" is selected and there are missing values
+        df = utils.handle_missing_values(
+            df,
+            x_value_columns,
+            y_value_columns,
+            port_object.handle_missing_values,
+        )
+
         features = df[x_value_columns]
 
         # Encode test feature columns with one-hot encoder
@@ -306,12 +313,24 @@ class ClassificationPredictor:
         # Convert test table to pandas dataframe
         df = input_test_table.to_pandas()
 
+        # Get feature columns
+        x_value_columns = port_object.spec.feature_schema.column_names
+
+        # Get target column
+        y_value_columns = port_object.spec.target_schema.column_names
+
         # Skip rows with missing values if "SkipRow" option of the learner node is selected
         # or fail execution if "Fail" is selected and there are missing values
-        df = utils.handle_missing_values(df, port_object.handle_missing_values)
+        df = utils.handle_missing_values(
+            df,
+            x_value_columns,
+            y_value_columns,
+            port_object.handle_missing_values,
+        )
 
         # Get feature column names
         feature_columns = port_object.spec.feature_schema.column_names
+
         # Get target column for the prediction column
         y_pred = utils.get_prediction_column_name(
             self.predictor_settings.prediction_column, port_object.spec.target_schema

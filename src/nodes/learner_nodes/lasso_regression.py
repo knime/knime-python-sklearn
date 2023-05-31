@@ -43,7 +43,7 @@
 # ------------------------------------------------------------------------
 
 
-import knime_extension as knext
+import knime.extension as knext
 import sklearn_ext
 from util import utils
 from sklearn.linear_model import Lasso
@@ -196,11 +196,20 @@ class LassoLearner(knext.PythonNode):
         missing_value_handling_setting = utils.MissingValueHandling[
             self.general_settings.missing_value_handling
         ]
-        dfX = utils.handle_missing_values(dfX, missing_value_handling_setting)
+
+        feature_column_names = self.general_settings.feature_columns
+        target_column_name = self.general_settings.target_column
+
+        df = utils.handle_missing_values(
+            dfX,
+            feature_column_names,
+            target_column_name,
+            missing_value_handling_setting,
+        )
 
         # Filter feature and target columns
-        dfx = dfX.filter(items=self.general_settings.feature_columns)
-        dfy = dfX[self.general_settings.target_column]
+        dfx = df[feature_column_names]
+        dfy = df[[target_column_name]]
 
         # Encode feature columns with one-hot encoder
         dfx_encoded, one_hot_encoder = utils.encode_train_feature_columns(dfx)

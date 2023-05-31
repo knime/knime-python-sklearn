@@ -43,7 +43,7 @@
 # ------------------------------------------------------------------------
 
 
-import knime_extension as knext
+import knime.extension as knext
 import logging
 import pickle
 import pandas as pd
@@ -115,16 +115,27 @@ def skip_missing_values(df):
     return df_cleaned
 
 
-def handle_missing_values(df, missing_value_handling_setting):
+def handle_missing_values(
+    df, feature_columns, target_columns, missing_value_handling_setting
+):
     # Drops rows if SkipRow option is selected, otherwise fails
     # if there are any missing values in the data (=Fail option is selected)
-    if missing_value_handling_setting == MissingValueHandling.SkipRow:
+    if not isinstance(target_columns, list):
+        df_filtered = df[feature_columns + [target_columns]]
+    else:
+        df_filtered = df[feature_columns + target_columns]
+
+    if (
+        missing_value_handling_setting == MissingValueHandling.SkipRow
+        and df_filtered.isna().any().any()
+    ):
         df = skip_missing_values(df)
     else:
-        if df.isna().any().any():
+        if df_filtered.isna().any().any():
             raise knext.InvalidParametersError(
                 "There are missing values in the input data."
             )
+
     return df
 
 

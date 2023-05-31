@@ -43,7 +43,7 @@
 # ------------------------------------------------------------------------
 
 
-import knime_extension as knext
+import knime.extension as knext
 
 main_category = knext.category(
     path="/community",
