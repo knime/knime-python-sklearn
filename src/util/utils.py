@@ -44,6 +44,7 @@
 
 
 import knime.extension as knext
+from typing import Union
 import logging
 import pickle
 import pandas as pd
@@ -65,6 +66,17 @@ kernels = {
     "RBF": RBF,
     "WhiteKernel": WhiteKernel,
 }
+
+
+class MissingValueHandling(knext.EnumParameterOptions):
+    SkipRow = (
+        "Skip rows with missing values.",
+        "Rows with missing values will not be used for the training.",
+    )
+    Fail = (
+        "Fail on observing missing values.",
+        "Learner node will fail during the execution.",
+    )
 
 
 def is_numerical(column):
@@ -116,7 +128,10 @@ def skip_missing_values(df):
 
 
 def handle_missing_values(
-    df, feature_columns, target_columns, missing_value_handling_setting
+    df: pd.DataFrame,
+    feature_columns: list[str],
+    target_columns: Union[str, list[str]],
+    missing_value_handling_setting: MissingValueHandling,
 ):
     # Drops rows if SkipRow option is selected, otherwise fails
     # if there are any missing values in the data (=Fail option is selected)
@@ -446,18 +461,6 @@ classification_model_port_type = knext.port_type(
     object_class=ClassificationModelObject,
     spec_class=ClassificationModelObjectSpec,
 )
-
-
-class MissingValueHandling(knext.EnumParameterOptions):
-    SkipRow = (
-        "Skip rows with missing values.",
-        "Rows with missing values will not be used for the training.",
-    )
-    Fail = (
-        "Fail on observing missing values.",
-        "Learner node will fail during the execution.",
-    )
-
 
 # General settings for Lasso and GPR learner nodes
 @knext.parameter_group(label="Input")
