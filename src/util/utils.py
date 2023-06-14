@@ -112,9 +112,9 @@ def split_nominal_numerical(dfx):
     return dfx_nominal, dfx_numerical
 
 
-def skip_missing_values(df):
+def skip_missing_values(df: pd.DataFrame, col_names: list[str]):
     # Drops rows with missing values
-    df_cleaned = df.dropna()
+    df_cleaned = df.dropna(subset=col_names, how="any")
 
     n_rows = len(df)
     n_cleaned_rows = len(df_cleaned)
@@ -136,20 +136,27 @@ def handle_missing_values(
     # Drops rows if SkipRow option is selected, otherwise fails
     # if there are any missing values in the data (=Fail option is selected)
     if not isinstance(target_columns, list):
-        df_filtered = df[feature_columns + [target_columns]]
+        col_names = feature_columns + [target_columns]
     else:
-        df_filtered = df[feature_columns + target_columns]
+        col_names = feature_columns + target_columns
+
+    df_filtered = df[col_names]
 
     if (
         missing_value_handling_setting == MissingValueHandling.SkipRow
         and df_filtered.isna().any().any()
     ):
-        df = skip_missing_values(df)
+        df = skip_missing_values(df, col_names)
     else:
         if df_filtered.isna().any().any():
             raise knext.InvalidParametersError(
                 "There are missing values in the input data."
             )
+
+    if df.empty:
+        raise knext.InvalidParametersError(
+            f"""All rows are skipped due to missing values."""
+        )
 
     return df
 
