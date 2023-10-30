@@ -161,6 +161,14 @@ def handle_missing_values(
     return df
 
 
+def concatenate_predictions_with_input_table(df, dfx_predictions):
+    # Concatenate prediction columns with features dataframe
+    dfx_predictions.index = df.index
+    df = pd.concat((df, dfx_predictions), 1)
+
+    return df
+
+
 def encode_train_feature_columns(dfx):
     """
     Encode categorical training dataframe columns into a one-hot numeric array.

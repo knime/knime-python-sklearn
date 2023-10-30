@@ -180,9 +180,8 @@ class RegressionPredictor:
             port_object.predict(features_encoded), columns=y_pred
         )
 
-        # Concatenate prediction columns with features dataframe
-        df.index = dfx_predictions.index
-        df = pd.concat((df, dfx_predictions), 1)
+        # Concatenate predictions dataframe with features dataframe
+        df = utils.concatenate_predictions_with_input_table(df, dfx_predictions)
 
         return knext.Table.from_pandas(df)
 
@@ -352,8 +351,7 @@ class ClassificationPredictor:
         dfx_predictions = port_object.decode_target_values(dfx_predictions)
 
         # Concatenate predictions dataframe with features dataframe
-        df.index = dfx_predictions.index
-        df = pd.concat((df, dfx_predictions), 1)
+        df = utils.concatenate_predictions_with_input_table(df, dfx_predictions)
 
         if self.predictor_settings.predict_probs:
             # Probability estimates
