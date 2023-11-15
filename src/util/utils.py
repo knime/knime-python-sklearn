@@ -164,7 +164,7 @@ def handle_missing_values(
 def concatenate_predictions_with_input_table(df, dfx_predictions):
     # Concatenate prediction columns with features dataframe
     dfx_predictions.index = df.index
-    df = pd.concat((df, dfx_predictions), 1)
+    df = pd.concat([df, dfx_predictions], axis=1)
 
     return df
 
@@ -187,7 +187,7 @@ def encode_train_feature_columns(dfx):
 
     # Concatenate nominal and numerical dataframes back
     dfx_numerical.index = dfx_nominal_encoded.index
-    dfx_encoded = pd.concat((dfx_numerical, dfx_nominal_encoded), 1)
+    dfx_encoded = pd.concat([dfx_numerical, dfx_nominal_encoded], axis=1)
 
     # Convert feature column names to string
     # (due to: feature names are only supported if all input features
@@ -216,7 +216,7 @@ def encode_test_feature_columns(dfx, encoder):
 
     # Concatenate nominal and numerical dataframes back
     dfx_numerical.index = dfx_nominal_encoded.index
-    dfx_encoded = pd.concat((dfx_numerical, dfx_nominal_encoded), 1)
+    dfx_encoded = pd.concat([dfx_numerical, dfx_nominal_encoded], axis=1)
 
     # Convert feature column names to string
     # (due to: feature names are only supported if all input features

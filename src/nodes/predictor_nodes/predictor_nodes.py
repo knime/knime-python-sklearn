@@ -383,6 +383,6 @@ class ClassificationPredictor:
 
             # Concatenate probability estimates dataframe with the main(features + predictions)
             # dataframe
-            df = pd.concat([df, estimates_df], 1)
+            df = pd.concat([df, estimates_df], axis=1)
 
         return knext.Table.from_pandas(df)
