@@ -36,13 +36,14 @@ try {
             }
             stage("Build Python Extension") {
                 env.lastStage = env.STAGE_NAME
-
-                withEnv([ "MVN_OPTIONS=-Dknime.p2.repo=https://jenkins.devops.knime.com/p2/knime/" ]) {
-                    withCredentials([usernamePassword(credentialsId: 'ARTIFACTORY_CREDENTIALS', passwordVariable: 'ARTIFACTORY_PASSWORD', usernameVariable: 'ARTIFACTORY_LOGIN'),
-                    ]) {
-                        sh """
-                        micromamba run -p ${prefixPath} build_python_extension.py ${extensionPath} ${outputPath} -f --knime-version ${knimeVersion} --knime_build --excluded-files ${prefixPath}
-                        """
+                withMavenJarsignerCredentials(options: [artifactsPublisher(disabled: true)], skipJarsigner: false) {
+                    withEnv([ "MVN_OPTIONS=-Dknime.p2.repo=https://jenkins.devops.knime.com/p2/knime/" ]) {
+                        withCredentials([usernamePassword(credentialsId: 'ARTIFACTORY_CREDENTIALS', passwordVariable: 'ARTIFACTORY_PASSWORD', usernameVariable: 'ARTIFACTORY_LOGIN'),
+                        ]) {
+                            sh """
+                            micromamba run -p ${prefixPath} build_python_extension.py ${extensionPath} ${outputPath} -f --knime-version ${knimeVersion} --knime_build --excluded-files ${prefixPath}
+                            """
+                        }
                     }
                 }
             }
