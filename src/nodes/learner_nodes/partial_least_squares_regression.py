@@ -96,7 +96,7 @@ class PartialLeastSquaresAlgorithmSettings:
 
 
 @knext.node(
-    name="Partial Least Squares Regression Learner (sklearn)",
+    name="Sklearn Partial Least Squares Regression Learner (Labs)",
     node_type=knext.NodeType.LEARNER,
     category=sklearn_ext.regression_learners_category,
     icon_path="icons/sklearn-logo.png",

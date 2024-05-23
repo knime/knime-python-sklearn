@@ -46,7 +46,7 @@
 import knime.extension as knext
 
 main_category = knext.category(
-    path="/community",
+    path="/labs",
     level_id="sklearn_ext",
     name="Sklearn",
     description="Nodes for Sklearn library",

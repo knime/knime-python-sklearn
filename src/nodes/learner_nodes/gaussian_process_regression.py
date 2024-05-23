@@ -85,7 +85,7 @@ class GaussianProcessRegressionAlgorithmSettings:
 
 
 @knext.node(
-    name="Gaussian Process Regression Learner (sklearn)",
+    name="Sklearn Gaussian Process Regression Learner (Labs)",
     node_type=knext.NodeType.LEARNER,
     category=sklearn_ext.regression_learners_category,
     icon_path="icons/sklearn-logo.png",

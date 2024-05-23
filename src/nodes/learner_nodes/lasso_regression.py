@@ -77,7 +77,7 @@ class LassoAlgorithmSettings:
 
 
 @knext.node(
-    name="Lasso Regression Learner (sklearn)",
+    name="Sklearn Lasso Regression Learner (Labs)",
     node_type=knext.NodeType.LEARNER,
     category=sklearn_ext.regression_learners_category,
     icon_path="icons/sklearn-logo.png",
