@@ -182,7 +182,7 @@ def encode_train_feature_columns(dfx):
     dfx_nominal, dfx_numerical = split_nominal_numerical(dfx)
 
     # Encode nominal columns
-    one_hot_encoder = OneHotEncoder(handle_unknown="ignore", sparse=False)
+    one_hot_encoder = OneHotEncoder(handle_unknown="ignore", sparse_output=False)
     dfx_nominal_encoded = pd.DataFrame(one_hot_encoder.fit_transform(dfx_nominal))
 
     # Concatenate nominal and numerical dataframes back
@@ -458,9 +458,9 @@ class ClassificationModelObject(knext.PortObject):
         # Class probability column names are adjusted to “P ({predicted_col_name}={class_name})”
         class_probability_column_names = self._label_enc.classes_
         for i in range(len(class_probability_column_names)):
-            class_probability_column_names[
-                i
-            ] = f"P ({predicted_column_name[0]}={class_probability_column_names[i]}){suffix}"
+            class_probability_column_names[i] = (
+                f"P ({predicted_column_name[0]}={class_probability_column_names[i]}){suffix}"
+            )
 
         return class_probability_column_names
 
@@ -476,6 +476,7 @@ classification_model_port_type = knext.port_type(
     object_class=ClassificationModelObject,
     spec_class=ClassificationModelObjectSpec,
 )
+
 
 # General settings for Lasso and GPR learner nodes
 @knext.parameter_group(label="Input")
