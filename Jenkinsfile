@@ -67,11 +67,12 @@ try {
                         'knime-credentials-base',
                         'knime-gateway',
                         'knime-base',
-                         'knime-productivity-oss',
+                        'knime-productivity-oss',
                         'knime-json',
                         'knime-javasnippet',
                         'knime-reporting',
                         'knime-filehandling',
+                        'knime-scripting-editor',
                         repositoryName
                         ],
                 ],
