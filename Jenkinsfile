@@ -52,6 +52,14 @@ try {
                     env.lastStage = env.STAGE_NAME
                     p2Tools.deploy(outputPath)
                     println("Deployed")
+                    try {
+                        build job: "ap-composites/${env.BRANCH_NAME.replace('/', '%2F')}", parameters: [
+                            string(name: 'REPOSITORY', value: repositoryName)
+                        ], wait: false
+                    } catch (ex) {
+                        // Happens if ap-composites doesn't have a corresponding branch
+                        echo ex.toString()
+                    }
 
                 }
             workflowTests.runTests(
