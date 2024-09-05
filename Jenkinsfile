@@ -3,7 +3,7 @@ def BN = (BRANCH_NAME == 'master' || BRANCH_NAME.startsWith('releases/')) ? BRAN
 
 def repositoryName = 'knime-python-sklearn'
 
-library "knime-pipeline@$BN"
+library "knime-pipeline@$BRANCH_NAME"
 
 properties([
     parameters(
