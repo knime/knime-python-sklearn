@@ -1,5 +1,9 @@
 # KNIME Nodes for Scikit-Learn (sklearn) Algorithms
 
+[![Jenkins](https://jenkins.knime.com/buildStatus/icon?job=knime-python-sklearn%2Fmaster)](https://jenkins.knime.com/job/knime-python-sklearn/job/master)
+
+This repository is maintained by the [KNIME Team Rakete](mailto:team-rakete@knime.com).
+
 This repository contains the source code of the [KNIME Nodes for Scikit-Learn (sklearn) Algorithms](https://hub.knime.com/knime/extensions/org.knime.python.features.sklearn/latest) for [KNIME Analytics Platform](https://www.knime.com/knime-analytics-platform).
 The KNIME nodes in this extension make algorithms of the [scikit-learn](https://scikit-learn.org/stable/) library available in KNIME.
 
