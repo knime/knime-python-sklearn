@@ -6,6 +6,19 @@ def repositoryName = 'knime-python-sklearn'
 library "knime-pipeline@$BN"
 
 properties([
+    /*
+    When changes occur in the upstream jobs (e.g., "knime-python"), this configuration 
+    ensures that dependent jobs (e.g., "knime-python-sklearn") are automatically rebuilt.
+
+    Example:
+        upstream(
+            'knime-abc/' + env.BRANCH_NAME.replaceAll('/', '%2F') +
+            ', knime-xyz/' + env.BRANCH_NAME.replaceAll('/', '%2F')
+        )
+    */
+    pipelineTriggers([
+		upstream('knime-python/' + env.BRANCH_NAME.replaceAll('/', '%2F'))
+	]),
     parameters(
         knimetools.getPythonExtensionParameters()
     ),
