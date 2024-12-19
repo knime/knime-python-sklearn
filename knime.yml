@@ -7,5 +7,5 @@ group_id: org.knime.python
 version: 5.5.0
 vendor: KNIME AG, Zurich, Switzerland
 feature_dependencies:
-  - org.knime.features.python3.scripting 5.4.0
+  - org.knime.features.python3.scripting 5.5.0
 license_file: LICENSE.txt
