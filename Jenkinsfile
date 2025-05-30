@@ -38,7 +38,7 @@ try {
                 'knime-testing-internal',
                 'knime-python-legacy',
                 'knime-conda',
-                'knime-python-bundling',
+                'knime-conda-channels',
                 'knime-credentials-base',
                 'knime-gateway',
                 'knime-base',
