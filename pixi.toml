@@ -1,0 +1,30 @@
+[workspace]
+channels = ["knime/label/nightly", "knime", "conda-forge"]
+platforms = ["win-64", "linux-64", "osx-64", "osx-arm64"]
+
+[pypi-options]
+no-build = true
+
+[tasks]
+
+[dependencies]
+knime-extension = "5.8.*"
+knime-python-versions = "5.8.*"
+knime-python-scripting = "5.8.*"
+python = "3.11.*"
+
+
+[feature.build.dependencies]
+python = "3.9.*"
+knime-extension-bundling = "5.8.*"
+jake = "*"
+
+[feature.dev.dependencies]
+debugpy = "*"
+
+[feature.build.tasks]
+build = { args = [{ "arg" = "dest", "default" = "./local-update-site" }], cmd = "build-python-extension . {{ dest }} --render-folder ./render-dir --force"}
+
+[environments]
+build = {features = ["build"], no-default-feature = true}
+dev = {features = ["dev"]}
