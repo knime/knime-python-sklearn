@@ -47,7 +47,6 @@ try {
                 'knime-javasnippet',
                 'knime-reporting',
                 'knime-filehandling',
-                'knime-scripting-editor',
                 repositoryName
                 ],
         ],
