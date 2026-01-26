@@ -8,15 +8,15 @@ no-build = true
 [tasks]
 
 [dependencies]
-knime-extension = "5.8.*"
-knime-python-versions = "5.8.*"
-knime-python-scripting = "5.8.*"
+knime-extension = "5.*"
+knime-python-versions = "5.*"
+knime-python-scripting = "5.*"
 python = "3.11.*"
 
 
 [feature.build.dependencies]
 python = "3.9.*"
-knime-extension-bundling = "5.9.*"
+knime-extension-bundling = "5.10.*"
 jake = "*"
 
 [feature.dev.dependencies]
